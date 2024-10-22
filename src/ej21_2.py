@@ -9,7 +9,7 @@ def almacenar_contrasenia():
 def comprobar_contrasenia(valor):
     contraseña = almacenar_contrasenia()
     if contraseña == valor:
-        print("Contraseña Correcta!")
+        print("Contraseña Correcta!") 
     else:
         print("Contraseña incorrecta...!")
 
