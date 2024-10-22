@@ -1,6 +1,6 @@
 # Los alumnos de un curso se han dividido en dos grupos A y B de acuerdo al sexo y el nombre. El grupo A esta formado por las mujeres con un nombre anterior a la M y los hombres con un nombre posterior a la N y el grupo B por el resto. Escribir un programa que pregunte al usuario su nombre y sexo, y muestre por pantalla el grupo que le corresponde.
 
-def comprobar_nombres(nombre: str, sexo:str):
+def asignar_grupo(nombre: str, sexo:str):
     nombre = str(nombre)
     sexo = str(sexo)
 
@@ -13,10 +13,30 @@ def comprobar_nombres(nombre: str, sexo:str):
 
 
 
+
+
+def validar_datos(nombre, sexo):  # FIX ME [ HAY QUE HACER QUE NO ME PERMITA ENVIAR DATOS QUE SEAN NÚMEROS ENTEROS O DECIMALES ] [SI ESTA FUNCION SE COMENTA, EL CÓDIGO HACE SU FUNCION PERO PERMITE NÚMEROS]
+    
+    while nombre.isdigit() and sexo.isdigit():
+        try:
+            if nombre == int or nombre == float:
+                return ValueError("El nombre ha de ser una letra del abecedario!")
+            elif sexo == int or sexo == float:
+                return ValueError("El sexo debe ser o masculino o femenino!")
+            elif sexo != "F" or sexo != "M":
+                return ValueError("El sexo debe ser o masculino o femenino!")
+
+        except:
+            return nombre, sexo
+
+
 def main():
+
     nombre = input("Introduzca su nombre: ").lower
     sexo = input("Introduzca con que genero se identefica\nM | F: ")
-    comprobar_nombres(nombre, sexo)
+
+    validar_datos(nombre, sexo)
+    asignar_grupo(nombre, sexo)
 
 
 if __name__ == "__main__":
