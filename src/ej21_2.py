@@ -1,25 +1,23 @@
-# Escribir un programa que almacene la cadena de caracteres contraseña en una variable, pregunte al usuario por la contraseña e imprima por pantalla si la contraseña introducida por el usuario coincide con la guardada en la variable sin tener en cuenta mayúsculas y minúsculas.
+# Escribir un programa que almacene la cadena de caracteres contrasenia en una variable, pregunte al usuario por la contrasenia e imprima por pantalla si la contrasenia introducida por el usuario coincide con la guardada en la variable sin tener en cuenta mayúsculas y minúsculas.
 
 
-def almacenar_contraseña(contraseña):
+def almacenar_contrasenia():
     contraseña = "contraseña"
+
     return contraseña
 
-def pedir_contraseña(contraseña_usr):
-    contraseña_usr = str(input("Introduce tu contraseña")).lower
-    return contraseña_usr
+def comprobar_contrasenia(valor):
+    contraseña = almacenar_contrasenia()
+    if contraseña == valor:
+        print("Contraseña Correcta!")
+    else:
+        print("Contraseña incorrecta...!")
+
 
 
 def main():
-    
-    if contraseña_usr == contraseña:
-        print("Felicidades, has adivinado la contraseña!")
-    else:
-        print("Contraseña incorrecta!")
-
-
-    contraseña = almacenar_contraseña()
-    contraseña_usr = pedir_contraseña()
+    preg_contraseña = input("Introduzca una contraseña: ").lower()
+    preg_contraseña = comprobar_contrasenia(preg_contraseña)
 
 
 
