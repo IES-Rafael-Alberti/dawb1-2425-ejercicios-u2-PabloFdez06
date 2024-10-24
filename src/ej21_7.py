@@ -2,13 +2,12 @@
 def pedir_renta() -> int:
     renta_correcta = False
     while not renta_correcta:
-        renta = input("Introduzca su renta anual: ")
         try:
-            if renta is not int(renta):
-                raise ValueError("El valor de renta debe ser un digito")
+            renta = int(input("Introduzca su renta anual: "))
             renta_correcta = True
-        except ValueError as e:
-            print(f"ERROR: {e}")
+                
+        except ValueError:
+            print(f"ERROR de Formato!!!")
 
     return renta
     
@@ -29,9 +28,6 @@ def comprobar_impositivo(renta):
     return impositivo
 
     
-
-
-
 def main():
     renta = pedir_renta()
     impositivo = comprobar_impositivo(renta)
