@@ -2,18 +2,22 @@
 
 import os
 import time
+OPCIONES = 1, 2, 3
+
 
 def limpiar():
     os.system("cls")
 
 
+
+
 def menu_programa():
-    OPCIONES = 1, 2, 3
+
     valor_correcto = False
     while not valor_correcto:
         time.sleep(0.5)
         print("1- Comenzar programa.\n2- Imprimir listado\n3- Finalizar programa.\n")
-        time.sleep(1)
+        time.sleep(0.5)
         try:
             valor = int(input("Selección > "))
             if type(valor) != int:
@@ -29,17 +33,15 @@ def menu_programa():
         except ValueError:
             print(f"ERROR de Formato!!!")
 
-    return valor
 
-
-def seleccion_menu():
-
-    pass
 
 
 def main():
-    menu_programa()
-    limpiar()
+    opcion = None
+    while opcion != 3:
+        ### bucle aqui en main
+    pass
+
 
 if __name__ == "__main__":
     main()
