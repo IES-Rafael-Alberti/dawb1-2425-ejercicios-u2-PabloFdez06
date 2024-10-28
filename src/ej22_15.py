@@ -1,8 +1,8 @@
-# Leer números enteros de teclado, hasta que el usuario ingrese el 0. Finalmente, mostrar la sumatoria de todos los números ingresados
-
+# Leer números enteros de teclado, hasta que el usuario ingrese el 0. Finalmente, mostrar la sumatoria de todos los números positivos ingresados.
 
 def pedir_entrada():
-    suma = 0  
+    suma = 0
+    negativos = 0
     entra_bucle = True
 
     while entra_bucle:
@@ -11,8 +11,11 @@ def pedir_entrada():
 
             if num == 0: 
                 entra_bucle = False
+            elif num < 0:
+                negativos += num  
+            
             else:
-                suma += num  
+                suma += num
 
         except ValueError:
             print("Por favor, ingrese un número entero válido.")
@@ -30,6 +33,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-    ##### SIN ACABAR #####
