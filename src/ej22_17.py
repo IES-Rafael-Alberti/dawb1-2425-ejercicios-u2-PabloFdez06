@@ -19,15 +19,18 @@ def pedir_num():
         except ValueError:
             print(f"ERROR de Formato!!!")
 
-    mostrar_numero(num)
+    return str(num)
 
-def mostrar_numero(numero: str):
-    numero = str(numero).split()
-    print(f"{numero}")
+def mostrar_numero(numero):
+    suma = 0
+    for digitos in numero:
+        suma += int(digitos)
+    print(f"{suma}")
 
 
 def main():
-    pedir_num()
+    numero = pedir_num()
+    mostrar_numero(numero)
 
 if __name__ == "__main__":
     main()
