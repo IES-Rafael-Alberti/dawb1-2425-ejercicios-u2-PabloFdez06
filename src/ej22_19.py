@@ -33,15 +33,28 @@ def menu_programa():
         except ValueError:
             print(f"ERROR de Formato!!!")
 
+    return valor
+
 
 
 
 def main():
-    opcion = None
-    while opcion != 3:
-        ### bucle aqui en main
-    pass
+    opcion = menu_programa()
+    opcionc = False
 
+    while opcionc is not True:
+        if opcion == 1:
+            print("Buenas, has escogido la opción 1!")
+
+        elif opcion == 2:
+            print("Buenas, has escogido la opción 2!")
+
+        
+    if opcion == 3:
+        print("Programa Finalizado.")
+            
+            
+## SIN FINALIZAR BUCLE DEL MAIN ##
 
 if __name__ == "__main__":
     main()
