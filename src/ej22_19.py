@@ -39,19 +39,28 @@ def menu_programa():
 
 
 def main():
-    opcion = menu_programa()
-    opcionc = False
 
-    while opcionc is not True:
+    salir = False
+
+    while not salir:
+        opcion = menu_programa()
+
         if opcion == 1:
             print("Buenas, has escogido la opción 1!")
 
         elif opcion == 2:
             print("Buenas, has escogido la opción 2!")
 
-        
-    if opcion == 3:
-        print("Programa Finalizado.")
+
+        else:
+            salir = True
+
+    limpiar()
+    print("Has salido con exito de la aplicación!!\n\n")
+
+
+            
+
             
             
 ## SIN FINALIZAR BUCLE DEL MAIN ##
