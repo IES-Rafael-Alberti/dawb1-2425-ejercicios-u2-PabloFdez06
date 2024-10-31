@@ -166,18 +166,18 @@ def obtener_pista(numero: int, numero_oculto: int, intentos: int, frio: int, cal
         if numero > numero_oculto:
             print(f"FRÍO, FRÍO, el número oculto es MENOR... ¡te quedan {intentos} intentos!\n")
             
-
         else:
             print(f"FRÍO, FRÍO, el número oculto es MAYOR... ¡te quedan {intentos} intentos!\n")
     
-    if evaluar_diferencia(numero, numero_oculto, frio, caliente) == 1:
+    elif evaluar_diferencia(numero, numero_oculto, frio, caliente) == 1:
         if numero > numero_oculto:
             print(f"CALIENTE, CALIENTE, el número oculto es MENOR... ¡te quedan {intentos} intentos!\n")
+        
         else:
             print(f"CALIENTE, CALIENTE, el número oculto es MENOR... ¡te quedan {intentos} intentos!\n")
 
     
-    if evaluar_diferencia(numero, numero_oculto, frio, caliente) == 2:
+    elif evaluar_diferencia(numero, numero_oculto, frio, caliente) == 2:
         if numero > numero_oculto:
             print(f"TE QUEMAS, el número oculto es MENOR... ¡te quedan {intentos} intentos!\n")
 
@@ -237,20 +237,23 @@ def adivina_el_numero(numero_oculto: int, total_intentos: int, minimo: int, maxi
     numero = genera_numero_oculto(maximo, minimo)
     intentos = total_intentos
     intentos_realizados = 0
-
-    valor_correcto = False
-    while not valor_correcto:
-        numero = pedir_numero_usuario("Qué número es? > ")
-        if numero != numero_oculto:
-            intentos += -1
-            obtener_pista(numero, numero_oculto, intentos, frio, caliente)
+    numero_adivinado = numero
+    
+    while intentos > 0:        
+        try:
+            numero = pedir_numero_usuario("Qué número es? > ")
             intentos_realizados += 1
-        else:
-            valor_correcto = True
-            numero_adivinado = numero
-            
-             
-    return numero_adivinado, intentos_realizados, intentos
+            if numero != numero_oculto:
+                intentos -= 1
+                obtener_pista(numero, numero_oculto, intentos, frio, caliente)
+
+            else:
+                numero_adivinado = numero
+
+        except ValueError:
+            mostrar_error(f"ERROR de Formato!!!")
+
+    return numero_adivinado, intentos, intentos_realizados
 
 
 def configurar_rangos_numeros() -> tuple:
@@ -465,8 +468,6 @@ def mostrar_menu():
     print("4. Salir.\n")
 
 
-
-
 def comprobar_opcion(opcion: int):
 	# Crear la documentación recomendada para esta función
     return 1 <= opcion <= 4
@@ -479,19 +480,22 @@ def elegir_opcion_menu() -> int:
     Returns:
         int: La opción elegida por el usuario.
     """
-	# Corregir posibles errores...
+
     opcion_correcta = False
     while not opcion_correcta:
+        try:
+            opcion = pedir_numero_usuario("Elije => ")
+            if opcion_correcta != comprobar_opcion(opcion):
+                opcion_correcta = True
 
-        opcion = pedir_numero_usuario("Elije => ")
-        if opcion_correcta != comprobar_opcion(opcion):
-            opcion_correcta = True
+            else:
+                mostrar_error(f"Opción {opcion} incorrecta! (1-4)")
 
-        else:
-            mostrar_error(f"Opción {opcion} incorrecta! (1-4)")
+        except ValueError:
+            mostrar_error(f"ERROR de Formato!!!")
+
 
     return opcion
-
 
 
 def jugar(numero_oculto: int, intentos: int, frio: int, caliente: int, minimo: int, maximo: int):
@@ -518,19 +522,16 @@ def jugar(numero_oculto: int, intentos: int, frio: int, caliente: int, minimo: i
 	# También debes corregir posibles errores...
     limpiar_pantalla()
     mostrar_titulo(3, intentos)
-    numero_adivinado, intentos_realizados = adivina_el_numero(numero_oculto, intentos, frio, caliente, maximo, minimo)
+    numero_adivinado, intentos, intentos_realizados = adivina_el_numero(numero_oculto, intentos, frio, caliente, maximo, minimo)
 
-    if numero_oculto != numero_adivinado and intentos <= 0:
+    if intentos == 0 and numero_adivinado != numero_oculto:
         print(f"\nGAME OVER - ¡Otra vez será! El número era {numero_oculto}")
 
-    if numero_oculto == numero_adivinado:
+    else:
         print(f"\n¡Bravo! ¡Lo conseguiste en {intentos_realizados} intentos!")
 
-    time.sleep(2)    
+    time.sleep(3)
     limpiar_pantalla()
-
-
-    pausa
 
 
 def genera_numero_oculto(minimo, maximo):
@@ -577,11 +578,12 @@ def main():
     mostrar_configuracion(minimo, maximo, intentos, frio, caliente)
     limpiar_pantalla()
 
-    mostrar_menu()
+
 
     salir = False
 
     while not salir:
+        mostrar_menu()
         opcion = elegir_opcion_menu()
 
         if opcion == 1:
@@ -595,7 +597,6 @@ def main():
             mostrar_configuracion(minimo, maximo, intentos, frio, caliente)
             mostrar_menu()
 
-            
         else:
             salir = True
 
