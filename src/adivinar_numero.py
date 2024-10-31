@@ -22,7 +22,10 @@ def limpiar_pantalla():
     """
     try:
 		# Debe funcionar en todos los sistemas operativos
-        os.system("cls")
+        if os.name == ("posix"):
+            os.system("clear")
+        else:
+            os.system("cls")
     except Exception as e:
         mostrar_error(f"Problemas al intentar limpiar la pantalla: {e}")
 
@@ -43,7 +46,10 @@ def pausa(tiempo = 0, tecla_enter = False, limpiar = True):
     # o una pausa esperando a que el usuario "\nPresione ENTER para continuar..."
     # Además, dependiendo del parámetro opcional limpiar debe limpiar la consola o no
 
-        
+    # if tiempo > 0:
+    #     time.sleep(tiempo)
+    # elif tecla_enter and tiempo == 0:
+    #     input("\nPresione ENTER para continuar...")
 
 
 def mostrar_titulo(seccion: int, intentos: int = 0):
@@ -237,9 +243,9 @@ def adivina_el_numero(numero_oculto: int, total_intentos: int, minimo: int, maxi
     numero = genera_numero_oculto(maximo, minimo)
     intentos = total_intentos
     intentos_realizados = 0
-    numero_adivinado = numero
+    numero_adivinado = False
     
-    while intentos > 0:        
+    while intentos > 0 and numero_adivinado == False:        
         try:
             numero = pedir_numero_usuario("Qué número es? > ")
             intentos_realizados += 1
@@ -248,7 +254,7 @@ def adivina_el_numero(numero_oculto: int, total_intentos: int, minimo: int, maxi
                 obtener_pista(numero, numero_oculto, intentos, frio, caliente)
 
             else:
-                numero_adivinado = numero
+                numero_adivinado = True
 
         except ValueError:
             mostrar_error(f"ERROR de Formato!!!")
@@ -469,6 +475,15 @@ def mostrar_menu():
 
 
 def comprobar_opcion(opcion: int):
+    """
+    Corrige si la opción entregada es correcta.
+
+    Args:
+        opcion (int):
+    
+    Returns:
+        (bool): Si la opción está entre 1 y 4 es True, sino False.
+    """
 	# Crear la documentación recomendada para esta función
     return 1 <= opcion <= 4
 
