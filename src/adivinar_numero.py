@@ -165,15 +165,14 @@ def obtener_pista(numero: int, numero_oculto: int, intentos: int, frio: int, cal
     if evaluar_diferencia(numero, numero_oculto, frio, caliente) == 0:
         if numero > numero_oculto:
             print(f"FRÍO, FRÍO, el número oculto es MENOR... ¡te quedan {intentos} intentos!\n")
+            
 
         else:
             print(f"FRÍO, FRÍO, el número oculto es MAYOR... ¡te quedan {intentos} intentos!\n")
-
     
     if evaluar_diferencia(numero, numero_oculto, frio, caliente) == 1:
         if numero > numero_oculto:
             print(f"CALIENTE, CALIENTE, el número oculto es MENOR... ¡te quedan {intentos} intentos!\n")
-
         else:
             print(f"CALIENTE, CALIENTE, el número oculto es MENOR... ¡te quedan {intentos} intentos!\n")
 
@@ -184,6 +183,7 @@ def obtener_pista(numero: int, numero_oculto: int, intentos: int, frio: int, cal
 
         else:
             print(f"TE QUEMAS, el número oculto es MAYOR... ¡te quedan {intentos} intentos!\n")
+
 
 
 def pedir_numero_usuario(mensaje: str, minimo: int = None, maximo: int = None) -> int:
@@ -242,16 +242,15 @@ def adivina_el_numero(numero_oculto: int, total_intentos: int, minimo: int, maxi
     while not valor_correcto:
         numero = pedir_numero_usuario("Qué número es? > ")
         if numero != numero_oculto:
+            intentos += -1
             obtener_pista(numero, numero_oculto, intentos, frio, caliente)
+            intentos_realizados += 1
         else:
             valor_correcto = True
             numero_adivinado = numero
             
              
-
-
-
-    return numero_adivinado, intentos_realizados
+    return numero_adivinado, intentos_realizados, intentos
 
 
 def configurar_rangos_numeros() -> tuple:
@@ -521,12 +520,14 @@ def jugar(numero_oculto: int, intentos: int, frio: int, caliente: int, minimo: i
     mostrar_titulo(3, intentos)
     numero_adivinado, intentos_realizados = adivina_el_numero(numero_oculto, intentos, frio, caliente, maximo, minimo)
 
+    if numero_oculto != numero_adivinado and intentos <= 0:
+        print(f"\nGAME OVER - ¡Otra vez será! El número era {numero_oculto}")
+
     if numero_oculto == numero_adivinado:
         print(f"\n¡Bravo! ¡Lo conseguiste en {intentos_realizados} intentos!")
 
-    if intentos == 0 and numero_oculto != numero_adivinado:
-        print(f"\nGAME OVER - ¡Otra vez será! El número era {numero_adivinado}")
-    
+    time.sleep(2)    
+    limpiar_pantalla()
 
 
     pausa
