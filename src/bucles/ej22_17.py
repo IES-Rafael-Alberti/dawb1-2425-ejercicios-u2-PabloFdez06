@@ -25,12 +25,13 @@ def mostrar_numero(numero):
     suma = 0
     for digitos in numero:
         suma += int(digitos)
-    print(f"{suma}")
+    return suma
 
 
 def main():
     numero = pedir_num()
-    mostrar_numero(numero)
+    suma = mostrar_numero(numero)
+    print (suma)
 
 if __name__ == "__main__":
     main()

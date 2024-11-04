@@ -18,7 +18,7 @@ def contar_letras(frase, letra):
         if letras == letra:
             contador += 1
 
-    print(f"La letra ingresada se repite en total {contador} veces.")
+    return f"La letra ingresada se repite en total {contador} veces."
 
 
 
@@ -26,8 +26,8 @@ def contar_letras(frase, letra):
 def main():
     frase = pedir_frase()
     letra = pedir_letra()
-    contar_letras(frase, letra)
-
+    contador_letras = contar_letras(frase, letra)
+    print(contador_letras)
 
 if __name__ == "__main__":
     main()

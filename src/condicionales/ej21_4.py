@@ -2,14 +2,15 @@
 
 def comprueba_parimpar(num: int) -> bool:
     if num % 2 == 0:
-        return print("El número indicado es par")
+        return "El número indicado es par"
     else:
-        return print("El número indicado es impar")
+        return "El número indicado es impar"
 
 
 def main():
     num = int(input("Introduce un número para saber si es par o impar: "))
-    comprueba_parimpar(num)
+    resultado = comprueba_parimpar(num)
+    print(resultado)
 
 
 if __name__ == "__main__":

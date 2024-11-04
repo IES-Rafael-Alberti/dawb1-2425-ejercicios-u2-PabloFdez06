@@ -9,16 +9,16 @@ def almacenar_contrasenia():
 def comprobar_contrasenia(valor):
     contraseña = almacenar_contrasenia()
     if contraseña == valor:
-        print("Contraseña Correcta!") 
+        return "Contraseña Correcta!"
     else:
-        print("Contraseña incorrecta...!")
+        return "Contraseña incorrecta...!"
 
 
 
 def main():
     preg_contraseña = input("Introduzca una contraseña: ").lower()
-    preg_contraseña = comprobar_contrasenia(preg_contraseña)
-
+    comprobacion = comprobar_contrasenia(preg_contraseña)
+    print(comprobacion)
 
 
 if __name__ == "__main__":

@@ -29,8 +29,8 @@ def pedir_edad():
 
 def main():
     edad = pedir_edad()
-    serie_edad(edad)
-
+    serie = serie_edad(edad)
+    print (serie)
 
 if __name__ == "__main__":
     main()
